@@ -39,7 +39,7 @@ class ToDoListTable extends React.Component {
             descr: todoTitle,
             isDone: false,
         }
-        const newList = [...todoList, newTask]
+        const newList = [...todoList, newTask];
         this.setState({todoLis: newList})
         this.onChangeTodoTitle('');
     }
@@ -53,11 +53,15 @@ class ToDoListTable extends React.Component {
                 this.setState({ todoList: newList });
                 break;
             }
-            // case "check": {
-            //     todoList = [...todoList.slice(0, ind),  ,...todoList.slice(ind+1)];
-            //     this.setState(prevState => {return { listLength: prevState.listLength - 1 }})
-            //     break;
-            // }
+            case "check": {
+                // todoList = [...todoList.slice(0, ind),  ,...todoList.slice(ind+1)];
+                // this.setState(prevState => {return { listLength: prevState.listLength - 1 }})
+                const rowToChange = todoList[ind];
+                rowToChange.isDone = !rowToChange.isDone;
+                const newList = [...todoList.slice(0, ind), rowToChange,...todoList.slice(ind+1)];
+                this.setState({ todoList: newList });
+                break;
+            }
             default:
                 return;
         }
