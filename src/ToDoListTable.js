@@ -1,6 +1,7 @@
 import React from "react"
 import AddTaskBar from "./AddTaskBar";
 import ToDoList from "./ToDoList";
+import {idGenerator} from "./services";
 import "./_todo-table.sass";
 
 const todoList = [
@@ -13,6 +14,7 @@ const todoList = [
 class ToDoListTable extends React.Component {
     constructor(props) {
         super(props);
+        this.ids = idGenerator(todoList.length);
         this.state ={
             todoTitle: '',
         };
@@ -32,6 +34,7 @@ class ToDoListTable extends React.Component {
             return;
         }
         todoList.push({
+            id: this.ids.next().value,
             descr: todoTitle,
             isDone: false,
         });

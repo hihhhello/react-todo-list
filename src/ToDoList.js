@@ -1,17 +1,15 @@
 import ToDoRow from "./ToDoRow";
-import {idGenerator} from "./services";
 import "./_todo-list.sass";
 function ToDoList({ todoList }) {
-    const ids = idGenerator();
     return(
         <div className="todo-list">
             <div className="container">
                 <div className="todo-list__wrapper">
                     <div className="todo-list__items">
                         {
-                            todoList.map(({descr, isDone}) => 
+                            todoList.map(({descr, isDone, id}) => 
                             { 
-                                return <ToDoRow key={ids.next().value} isDone={isDone} descr={descr} />;
+                                return <ToDoRow key={id} isDone={isDone} descr={descr} />;
                             })
                         }
                     </div>
