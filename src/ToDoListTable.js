@@ -4,7 +4,7 @@ import ToDoList from "./ToDoList";
 import {idGenerator} from "./services";
 import "./_todo-table.sass";
 
-const todoList = [
+let todoList = [
     {id: 0, descr: "Vanilla JavaScript", isDone: true},
     {id: 1, descr: "Vue.js", isDone: true},
     {id: 2, descr: "React.js", isDone: false},
@@ -17,6 +17,7 @@ class ToDoListTable extends React.Component {
         this.ids = idGenerator(todoList.length);
         this.state ={
             todoTitle: '',
+            listLength: todoList.length,
         };
 
         this.onChangeTodoTitle = this.onChangeTodoTitle.bind(this); 
@@ -42,7 +43,21 @@ class ToDoListTable extends React.Component {
         this.onChangeTodoTitle('');
     }
     
-    handleRowButtons(id, e) {
+    handleRowButtons(rowId, e) {
+        const ind = todoList.findIndex((task) => task.id === rowId);
+        switch(e.target.getAttribute("data-row-btn")) {
+            case "delete": {
+                todoList = [...todoList.slice(0, ind), ...todoList.slice(ind+1)];
+                this.setState(prevState => {return { listLength: prevState.listLength - 1 }})
+                break;
+            }
+            default:
+                return;
+        }
+    }
+
+    handleClearButton() {
+        
     }
 
     render() {
