@@ -8,10 +8,6 @@ function ToDoList({ todoList }) {
             <div className="container">
                 <div className="todo-list__wrapper">
                     <div className="todo-list__items">
-                        {/* <ToDoRow isChecked descr={"Vanilla JavaScript"}/>
-                        <ToDoRow isChecked descr={"Vue.js"}/>
-                        <ToDoRow isChecked={false} descr={"React.js"}/>
-                        <ToDoRow isChecked={false} descr={"Node.js"}/> */}
                         {
                             todoList.map(({descr, isDone}) => 
                             { 
