@@ -1,6 +1,6 @@
 import ToDoRow from "./ToDoRow";
 import "./_todo-list.sass";
-function ToDoList({ todoList }) {
+function ToDoList({ todoList, onClick }) {
     return(
         <div className="todo-list">
             <div className="container">
@@ -9,7 +9,13 @@ function ToDoList({ todoList }) {
                         {
                             todoList.map(({descr, isDone, id}) => 
                             { 
-                                return <ToDoRow key={id} isDone={isDone} descr={descr} />;
+                                return <ToDoRow 
+                                            key={id}
+                                            id={id} 
+                                            isDone={isDone} 
+                                            descr={descr} 
+                                            onClick={onClick}
+                                            />;
                             })
                         }
                     </div>

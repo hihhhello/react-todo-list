@@ -21,6 +21,7 @@ class ToDoListTable extends React.Component {
 
         this.onChangeTodoTitle = this.onChangeTodoTitle.bind(this); 
         this.addTodo = this.addTodo.bind(this); 
+        this.handleRowButtons = this.handleRowButtons.bind(this); 
     }
 
     onChangeTodoTitle(title) {
@@ -40,6 +41,9 @@ class ToDoListTable extends React.Component {
         });
         this.onChangeTodoTitle('');
     }
+    
+    handleRowButtons(id, e) {
+    }
 
     render() {
         return(
@@ -52,7 +56,10 @@ class ToDoListTable extends React.Component {
                             onAdd={this.addTodo}
                             todoTitle={this.state.todoTitle}
                         />
-                        <ToDoList todoList={todoList} />
+                        <ToDoList 
+                            todoList={todoList} 
+                            onClick={(id, e) => this.handleRowButtons(id, e)}    
+                        />
                     </div>
                 </div>
             </div>
