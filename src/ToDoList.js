@@ -19,7 +19,7 @@ function ToDoList({ todoList, onClick }) {
                             })
                         }
                     </div>
-                    <div className="todo-list__clear">Clear</div>
+                    <button className="todo-list__clear">Clear</button>
                 </div>
             </div>
         </div>
