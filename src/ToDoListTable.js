@@ -4,10 +4,10 @@ import ToDoList from "./ToDoList";
 import "./_todo-table.sass";
 
 const todoList = [
-    {descr: "Vanilla JavaScript", isDone: true},
-    {descr: "Vue.js", isDone: true},
-    {descr: "React.js", isDone: false},
-    {descr: "Node.js", isDone: false},
+    {id: 0, descr: "Vanilla JavaScript", isDone: true},
+    {id: 1, descr: "Vue.js", isDone: true},
+    {id: 2, descr: "React.js", isDone: false},
+    {id: 3, descr: "Node.js", isDone: false},
 ];
 
 class ToDoListTable extends React.Component {
