@@ -10,12 +10,12 @@ function ToDoRow({ isDone, descr }) {
                 <div className="todo-row__wrapper">
                     <div className="todo-row__btns">
                         <div onClick={e=>{}} className="todo-row__btn todo-row__btn_delete">
-                            <img data-delete={true} src={"/icons/delete.svg"} alt={"delete"} />
+                            <img data-row-btn={"delete"} src={"/icons/delete.svg"} alt={"delete"} />
                         </div>
                         <div
                             onClick={e=>{}}
                             className="todo-row__btn todo-row__btn_check">
-                            <img data-checkbox={true} src={chbPath} alt={chbAlt}/>
+                            <img data-row-btn={"check"} src={chbPath} alt={chbAlt}/>
                         </div>
                     </div>
                     <div className={descrClass}>
