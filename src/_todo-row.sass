@@ -1,0 +1,28 @@
+.todo-row + .todo-row
+    margin-top: 35px
+.todo-row
+    &__wrapper
+        position: relative
+        display: flex
+        align-items: center
+        &::after
+            position: absolute
+            content: ''
+            width: 233px
+            height: 1px
+            border-bottom: 1px solid #000
+            bottom: -15px
+    &__btns
+        display: flex
+        align-items: center
+    &__btn
+        cursor: pointer
+        &_check
+            margin-left: 2px
+    &__descr
+        margin-left: 8px
+        font-size: 18px
+        line-height: 21px
+        &_checked
+            color: #FF0000
+            text-decoration: line-through
