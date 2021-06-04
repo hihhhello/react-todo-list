@@ -40,7 +40,8 @@ class ToDoListTable extends React.Component {
             isDone: false,
         }
         const newList = [...todoList, newTask];
-        this.setState({todoLis: newList})
+        console.log(newList);
+        this.setState({todoList: newList})
         this.onChangeTodoTitle('');
     }
     
