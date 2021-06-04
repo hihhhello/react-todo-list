@@ -1,6 +1,6 @@
 import ToDoRow from "./ToDoRow";
 import "./_todo-list.sass";
-function ToDoList({ todoList, onClick }) {
+function ToDoList({ todoList, onClick, onClear }) {
     return(
         <div className="todo-list">
             <div className="container">
@@ -19,7 +19,12 @@ function ToDoList({ todoList, onClick }) {
                             })
                         }
                     </div>
-                    <button className="todo-list__clear">Clear</button>
+                    <button 
+                        onClick={onClear}
+                        className="todo-list__clear"
+                    >
+                        Clear
+                    </button>
                 </div>
             </div>
         </div>
