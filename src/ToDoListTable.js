@@ -2,6 +2,7 @@ import React from "react"
 import AddTaskBar from "./AddTaskBar";
 import ToDoList from "./ToDoList";
 import {idGenerator} from "./services";
+import ErrorBoundary from "./ErrorBoundary";
 import "./_todo-table.sass";
 
 class ToDoListTable extends React.Component {
@@ -70,12 +71,13 @@ class ToDoListTable extends React.Component {
 
     handleClearButton(e) {
         e.preventDefault();
-        // todoList = [];
-        // this.setState({listLength: 0});
         this.setState({todoList: []});
     }
 
     render() {
+        if(this.state.todoList.length > 5) {
+            throw new Error("test");
+        }
         return(
             <div className="todo-table">
                 <div className="container">
