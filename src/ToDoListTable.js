@@ -2,7 +2,6 @@ import React from "react"
 import AddTaskBar from "./AddTaskBar";
 import ToDoList from "./ToDoList";
 import {idGenerator} from "./services";
-import ErrorBoundary from "./ErrorBoundary";
 import "./_todo-table.sass";
 
 class ToDoListTable extends React.Component {
