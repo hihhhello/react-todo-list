@@ -9,12 +9,7 @@ class ToDoListTable extends React.Component {
         super(props);
         this.state ={
             todoTitle: '',
-            todoList: [
-                {id: 0, descr: "Vanilla JavaScript", isDone: true},
-                {id: 1, descr: "Vue.js", isDone: true},
-                {id: 2, descr: "React.js", isDone: false},
-                {id: 3, descr: "Node.js", isDone: false},
-            ],
+            todoList: [],
         };
         this.ids = idGenerator(this.state.todoList.length);
 
@@ -22,6 +17,18 @@ class ToDoListTable extends React.Component {
         this.addTodo = this.addTodo.bind(this); 
         this.handleRowButtons = this.handleRowButtons.bind(this); 
         this.handleClearButton = this.handleClearButton.bind(this); 
+    }
+
+    componentDidMount() {
+        const localeList = JSON.parse(localStorage.getItem("todo-list"));
+
+        this.setState({
+            todoList: localeList ? localeList : [],
+        });
+    }
+
+    componentDidUpdate() {
+        localStorage.setItem("todo-list", JSON.stringify(this.state.todoList));
     }
 
     onChangeTodoTitle(title) {
@@ -46,7 +53,7 @@ class ToDoListTable extends React.Component {
     }
     
     handleRowButtons(rowId, e) {
-        const {todoList} = this.state;
+        const { todoList } = this.state;
         const ind = todoList.findIndex((task) => task.id === rowId);
         switch(e.target.getAttribute("data-row-btn")) {
             case "delete": {
@@ -55,8 +62,6 @@ class ToDoListTable extends React.Component {
                 break;
             }
             case "check": {
-                // todoList = [...todoList.slice(0, ind),  ,...todoList.slice(ind+1)];
-                // this.setState(prevState => {return { listLength: prevState.listLength - 1 }})
                 const rowToChange = todoList[ind];
                 rowToChange.isDone = !rowToChange.isDone;
                 const newList = [...todoList.slice(0, ind), rowToChange,...todoList.slice(ind+1)];
