@@ -2,6 +2,9 @@ import React from "react"
 import AddTaskBar from "./AddTaskBar";
 import ToDoList from "./ToDoList";
 import {idGenerator} from "./services";
+
+import {ThemeContext} from "./theme-context";
+
 import "./_todo-table.sass";
 
 class ToDoListTable extends React.Component {
@@ -82,8 +85,9 @@ class ToDoListTable extends React.Component {
         if(this.state.todoList.length > 5) {
             throw new Error("test");
         }
+        const { theme } = this.context;
         return(
-            <div className="todo-table">
+            <div className={theme === "dark" ? "todo-table dark" : "todo-table"}>
                 <div className="container">
                     <div className="todo-table__wrapper">
                         <h1 className="todo-table__title">TO-DO LIST</h1>
@@ -103,5 +107,8 @@ class ToDoListTable extends React.Component {
         )
     }
 }
+
+ToDoListTable.contextType = ThemeContext;
+
 
 export default ToDoListTable;
