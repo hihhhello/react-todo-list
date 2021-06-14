@@ -1,4 +1,5 @@
 @import "./mixins"
+@import "./base"
 .header
     background-color: #420420
     height: 80px
@@ -26,7 +27,7 @@
             font-weight: 400
         @include link_hover
         &_active
-            color: #000
+            color: $main-color
             @include link_no_hover
     &__togle-btn
         cursor: pointer
