@@ -2,37 +2,55 @@ import React from "react";
 import Header from "./Header";
 import ToDoListTable from "./ToDoListTable";
 import ErrorBoundary from "./ErrorBoundary";
+import SyncTable from "./SyncTable";
+import Secret from "./Secret";
+
+import {
+  Switch,
+  Route,
+  Redirect,
+  BrowserRouter as Router,
+} from "react-router-dom";
 
 import { ThemeContext, themes } from "./theme-context";
 
-import "./_app.sass"
+import "./_app.sass";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
 
     this.toggleTheme = () => {
-      this.setState(state => ({
-        theme: 
-          state.theme === themes.dark 
-            ? themes.light 
-            : themes.dark
+      this.setState((state) => ({
+        theme: state.theme === themes.dark ? themes.light : themes.dark,
       }));
     };
 
     this.state = {
       theme: themes.light,
       toggleTheme: this.toggleTheme,
-    }
-
+    };
   }
   render() {
     return (
       <div className="app">
         <ThemeContext.Provider value={this.state}>
-          <Header />
           <ErrorBoundary>
-            <ToDoListTable />
+            <Router>
+              <Header />
+              <Switch>
+                <Route path="/home" exact>
+                  <ToDoListTable />
+                </Route>
+                <Route path="/sync-table" exact>
+                  <SyncTable />
+                </Route>
+                <Route path="/secret" exact>
+                  <Secret />
+                </Route>
+                <Redirect to="/home" exact />
+              </Switch>
+            </Router>
           </ErrorBoundary>
         </ThemeContext.Provider>
       </div>
