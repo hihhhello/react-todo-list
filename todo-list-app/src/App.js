@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "./Header";
-import ToDoListTable from "./ToDoListTable";
+import ToDoListPage from "./ToDoListPage";
 import ErrorBoundary from "./ErrorBoundary";
 import { SyncTablePage } from "./SyncTablePage";
 import Secret from "./Secret";
@@ -45,7 +45,7 @@ class App extends React.Component {
               <div className={contentClass}>
                 <Switch>
                   <Route path="/home" exact>
-                    <ToDoListTable />
+                    <ToDoListPage />
                   </Route>
                   <Route path="/sync-table" exact>
                     <SyncTablePage />
