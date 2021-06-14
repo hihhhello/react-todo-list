@@ -2,7 +2,7 @@ import React from "react";
 import Header from "./Header";
 import ToDoListTable from "./ToDoListTable";
 import ErrorBoundary from "./ErrorBoundary";
-import SyncTable from "./SyncTable";
+import { SyncTablePage } from "./SyncTablePage";
 import Secret from "./Secret";
 
 import {
@@ -32,6 +32,8 @@ class App extends React.Component {
     };
   }
   render() {
+    const contentClass =
+      this.state.theme === themes.dark ? "app__content app__content_dark" : "app__content";
     return (
       <div className="app">
         <ThemeContext.Provider value={this.state}>
@@ -39,12 +41,12 @@ class App extends React.Component {
             <Router>
               <Header />
               <Switch>
-                <div className="app__content">
+                <div className={contentClass}>
                   <Route path="/home" exact>
                     <ToDoListTable />
                   </Route>
                   <Route path="/sync-table" exact>
-                    <SyncTable />
+                    <SyncTablePage />
                   </Route>
                 </div>
                 <Route path="/secret" exact>
