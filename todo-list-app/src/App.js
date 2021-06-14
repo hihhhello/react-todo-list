@@ -39,12 +39,14 @@ class App extends React.Component {
             <Router>
               <Header />
               <Switch>
-                <Route path="/home" exact>
-                  <ToDoListTable />
-                </Route>
-                <Route path="/sync-table" exact>
-                  <SyncTable />
-                </Route>
+                <div className="app__content">
+                  <Route path="/home" exact>
+                    <ToDoListTable />
+                  </Route>
+                  <Route path="/sync-table" exact>
+                    <SyncTable />
+                  </Route>
+                </div>
                 <Route path="/secret" exact>
                   <Secret />
                 </Route>
