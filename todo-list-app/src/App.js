@@ -33,27 +33,29 @@ class App extends React.Component {
   }
   render() {
     const contentClass =
-      this.state.theme === themes.dark ? "app__content app__content_dark" : "app__content";
+      this.state.theme === themes.dark
+        ? "app__content app__content_dark"
+        : "app__content";
     return (
       <div className="app">
         <ThemeContext.Provider value={this.state}>
           <ErrorBoundary>
             <Router>
               <Header />
-              <Switch>
-                <div className={contentClass}>
+              <div className={contentClass}>
+                <Switch>
                   <Route path="/home" exact>
                     <ToDoListTable />
                   </Route>
                   <Route path="/sync-table" exact>
                     <SyncTablePage />
                   </Route>
-                </div>
-                <Route path="/secret" exact>
-                  <Secret />
-                </Route>
-                <Redirect to="/home" exact />
-              </Switch>
+                  <Route path="/secret" exact>
+                    <Secret />
+                  </Route>
+                  <Redirect to="/home" exact />
+                </Switch>
+              </div>
             </Router>
           </ErrorBoundary>
         </ThemeContext.Provider>
