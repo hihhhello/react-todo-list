@@ -1,2 +1,2 @@
-import { SecretPage } from "../SecretPage";
+import { SecretPage } from "./SecretPage";
 export default SecretPage;

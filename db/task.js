@@ -36,3 +36,14 @@ task.toggleStatus = async ({ userID, taskId, status }) => {
     await conn.commit();
     await conn.end();
 }
+
+task.clearList = async (userID) => {
+    try {
+        const conn = await create_con();
+        await conn.execute("DELETE FROM TASK WHERE user_id = ?", [userID]);
+        await conn.commit();
+        await conn.end();
+    } catch(e) {
+        throw e;
+    }
+}

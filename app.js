@@ -9,6 +9,7 @@ app.use(express.json({ extended: true }));
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/sync", require("./routes/api.sync"));
+app.use("/api/db", require("./routes/api.db"));
 
 app.use("/", (req, res) => {
     res.send("Hello world!");

@@ -3,7 +3,7 @@ import Header from "../Header";
 import ToDoListPage from "../../pages/ToDoListPage";
 import ErrorBoundary from "../ErrorBoundary";
 import SyncTablePage from "../../pages/SyncTablePage";
-import SecretPage from "../../pages/SecretPage";
+// import SecretPage from "../../pages/SecretPage";
 
 import {
   Switch,
@@ -52,7 +52,7 @@ class App extends React.Component {
                   <SyncTablePage />
                 </Route>
                 <Route path="/secret" exact>
-                  <SecretPage />
+                  {/* <SecretPage /> */}
                 </Route>
                 <Redirect to="/home" exact />
               </Switch>

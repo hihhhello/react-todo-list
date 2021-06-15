@@ -1,2 +1,2 @@
-import ToDoListPage from "./ToDoListPage";
+import { ToDoListPage } from "./ToDoListPage";
 export default ToDoListPage;

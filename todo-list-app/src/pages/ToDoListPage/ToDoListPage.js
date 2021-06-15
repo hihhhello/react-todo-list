@@ -1,112 +1,126 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import AddTaskBar from "../../components/AddTaskBar";
 import ToDoList from "../../components/ToDoList";
-import idGenerator from "../../services/id-generator";
-
-import { ThemeContext } from "../../context/theme-context";
+import { useHttp } from "../../hooks/http.hooks";
 
 import "./_todo-list-page.sass";
 
-export default class ToDoListPage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      todoTitle: "",
-      todoList: [],
-    };
-    this.ids = idGenerator(this.state.todoList.length);
+export const ToDoListPage = () => {
+  const { loading, request } = useHttp();
+  const [taskTitle, setTaskTitle] = useState("");
+  const [todoList, setTodoList] = useState([]);
 
-    this.onChangeTodoTitle = this.onChangeTodoTitle.bind(this);
-    this.addTodo = this.addTodo.bind(this);
-    this.handleRowButtons = this.handleRowButtons.bind(this);
-    this.handleClearButton = this.handleClearButton.bind(this);
-  }
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (user) {
+      const { userID } = user;
+      const fetchData = async () => {
+        try {
+          const { todoList } = await request("api/db/get-todos", "POST", { userID });
+          if (todoList) {
+            setTodoList(todoList);
+          }
+        } catch (e) {
+          console.log(e);
+        }
+      }
+      fetchData();
+    }
+    const localList = JSON.parse(localStorage.getItem("todo-list"));
+    if(localList) {
+      setTodoList(localList);
+    }
+  }, [request]);
 
-  componentDidMount() {
-    const localeList = JSON.parse(localStorage.getItem("todo-list"));
+  const onChangeTaskTitle = (title) => {
+    setTaskTitle(title);
+  };
 
-    this.setState({
-      todoList: localeList ? localeList : [],
-    });
-    // this.ids = idGenerator(this.state.todoList.length);
-  }
-
-  componentDidUpdate() {
-    localStorage.setItem("todo-list", JSON.stringify(this.state.todoList));
-    // this.ids = idGenerator(this.state.todoList.length);
-  }
-
-  onChangeTodoTitle(title) {
-    this.setState({ todoTitle: title });
-  }
-
-  addTodo(e) {
+  const addTodo = async (e) => {
     e.preventDefault();
-    const { todoTitle, todoList } = this.state;
-    if (!todoTitle) {
+    if (!taskTitle) {
       return;
     }
-    const newTask = {
-      id: 1,
-      title: todoTitle,
-      status: false,
-    };
-    const newList = [...todoList, newTask];
-    this.setState({ todoList: newList });
-    this.onChangeTodoTitle("");
-  }
 
-  handleRowButtons(rowId, e) {
-    const { todoList } = this.state;
-    const ind = todoList.findIndex((task) => task.id === rowId);
-    switch (e.target.getAttribute("data-row-btn")) {
-      case "delete": {
-        const newList = [...todoList.slice(0, ind), ...todoList.slice(ind + 1)];
-        this.setState({ todoList: newList });
-        break;
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (user) {
+      try {
+        const { userID } = user;
+        const { todoList } = await request("api/db/set-task", "POST", {
+          userID,
+          title: taskTitle,
+          descr: "descr",
+        });
+        setTodoList( todoList );
+        setTaskTitle("");
+      } catch (e) {
+        throw e;
       }
-      case "check": {
-        const rowToChange = todoList[ind];
-        rowToChange.status = !rowToChange.status;
-        const newList = [
-          ...todoList.slice(0, ind),
-          rowToChange,
-          ...todoList.slice(ind + 1),
-        ];
-        this.setState({ todoList: newList });
-        break;
-      }
-      default:
-        return;
     }
-  }
+  };
 
-  handleClearButton(e) {
+  const handleRowButtons = async (taskID, e) => {
+    const btn = e.target.getAttribute("data-row-btn");
+    const user = localStorage.getItem("user");
+    if (user) {
+      const { userID } = user;
+      try {
+        const task = await request("api/db/get-task", "PUT", { taskID });
+        const status = btn === "delete" ? 2 : !task.status;
+        const result = await request("api/db/set-task-status", "POST", {
+          userID,
+          taskID,
+          status,
+        });
+        setTodoList(result);
+      } catch (e) {
+        throw e;
+      }
+      return;
+    }
+
+    // implement change local status
+  };
+
+  const handleClearButton = async (e) => {
     e.preventDefault();
-    this.setState({ todoList: [] });
-  }
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (user) {
+      const { userID } = user;
+      try {
+        const { todoList } = await request("api/db/clear-list", "DELETE", { userID });
+        setTodoList(todoList);
+      } catch (e) {
+        throw e;
+      }
+      return;
+    }
 
-  render() {
-    return (
-      <div className="todo-table">
-        <div className="container">
-          <div className="todo-table__wrapper">
-            <h1 className="todo-table__title">TO-DO LIST</h1>
-            <AddTaskBar
-              onChange={this.onChangeTodoTitle}
-              onAdd={this.addTodo}
-              todoTitle={this.state.todoTitle}
-            />
+    localStorage.setItem("todo-list", JSON.stringify([]));
+    setTodoList([]);
+  };
+
+  return (
+    <div className="todo-table">
+      <div className="container">
+        <div className="todo-table__wrapper">
+          <h1 className="todo-table__title">TO-DO LIST</h1>
+          <AddTaskBar
+            onChange={onChangeTaskTitle}
+            onAdd={addTodo}
+            todoTitle={taskTitle}
+          />
+          {loading ? (
+            "Loading..."
+          ) : (
             <ToDoList
-              todoList={this.state.todoList}
-              onClick={(id, e) => this.handleRowButtons(id, e)}
-              onClear={this.handleClearButton}
+              todoList={todoList}
+              onClick={(id, e) => handleRowButtons(id, e)}
+              onClear={handleClearButton}
             />
-          </div>
+          )}
         </div>
       </div>
-    );
-  }
-}
-
-ToDoListPage.contextType = ThemeContext;
+    </div>
+  );
+};

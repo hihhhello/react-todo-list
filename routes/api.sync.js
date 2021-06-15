@@ -4,7 +4,6 @@ const router = Router();
 
 // /api/sync
 router.post("/", async (req, res) => {
-  console.log("BODY", req.body);
   try {
     const { userID } = req.body;
     const user = await User.getUser(userID);
