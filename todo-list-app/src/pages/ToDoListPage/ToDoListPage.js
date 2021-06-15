@@ -1,13 +1,13 @@
 import React from "react";
-import AddTaskBar from "./AddTaskBar";
-import ToDoList from "./ToDoList";
-import { idGenerator } from "./services";
+import AddTaskBar from "../../components/AddTaskBar";
+import ToDoList from "../../components/ToDoList";
+import idGenerator from "../../services/id-generator";
 
-import { ThemeContext } from "./theme-context";
+import { ThemeContext } from "../../context/theme-context";
 
-import "./_todo-table-page.sass";
+import "./_todo-list-page.sass";
 
-class ToDoListPage extends React.Component {
+export default class ToDoListPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -28,10 +28,12 @@ class ToDoListPage extends React.Component {
     this.setState({
       todoList: localeList ? localeList : [],
     });
+    // this.ids = idGenerator(this.state.todoList.length);
   }
 
   componentDidUpdate() {
     localStorage.setItem("todo-list", JSON.stringify(this.state.todoList));
+    // this.ids = idGenerator(this.state.todoList.length);
   }
 
   onChangeTodoTitle(title) {
@@ -45,7 +47,7 @@ class ToDoListPage extends React.Component {
       return;
     }
     const newTask = {
-      id: this.ids.next().value,
+      id: 1,
       title: todoTitle,
       status: false,
     };
@@ -85,9 +87,6 @@ class ToDoListPage extends React.Component {
   }
 
   render() {
-    // if (this.state.todoList.length > 5) {
-    //   throw new Error("Local error");
-    // }
     return (
       <div className="todo-table">
         <div className="container">
@@ -111,5 +110,3 @@ class ToDoListPage extends React.Component {
 }
 
 ToDoListPage.contextType = ThemeContext;
-
-export default ToDoListPage;

@@ -1,4 +1,4 @@
-import { ThemeContext } from "./theme-context";
+import { ThemeContext } from "../../context/theme-context";
 
 import { NavLink } from "react-router-dom";
 

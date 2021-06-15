@@ -1,5 +1,5 @@
 import React from "react";
 
-export default function SyncTable() {
+export const SecretPage = () => {
     return <h1>Secret</h1>;
 }

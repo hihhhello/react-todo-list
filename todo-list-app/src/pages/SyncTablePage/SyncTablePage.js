@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHttp } from "./hooks/http.hooks";
+import { useHttp } from "../../hooks/http.hooks";
 
 export const SyncTablePage = () => {
   const { loading, request } = useHttp();
@@ -12,11 +12,7 @@ export const SyncTablePage = () => {
 
   const syncTablesHandler = async () => {
     try {
-      const data = await request(
-        "api/sync",
-        "POST",
-        { userID },
-      );
+      const data = await request("api/sync", "POST", { userID });
       localStorage.setItem("todo-list", JSON.stringify(data.taskList));
     } catch (e) {}
   };

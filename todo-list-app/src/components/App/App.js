@@ -1,9 +1,9 @@
 import React from "react";
-import Header from "./Header";
-import ToDoListPage from "./ToDoListPage";
-import ErrorBoundary from "./ErrorBoundary";
-import { SyncTablePage } from "./SyncTablePage";
-import Secret from "./Secret";
+import Header from "../Header";
+import ToDoListPage from "../../pages/ToDoListPage";
+import ErrorBoundary from "../ErrorBoundary";
+import SyncTablePage from "../../pages/SyncTablePage";
+import SecretPage from "../../pages/SecretPage";
 
 import {
   Switch,
@@ -12,7 +12,7 @@ import {
   BrowserRouter as Router,
 } from "react-router-dom";
 
-import { ThemeContext, themes } from "./theme-context";
+import { ThemeContext, themes } from "../../context/theme-context";
 
 import "./_app.sass";
 
@@ -52,7 +52,7 @@ class App extends React.Component {
                   <SyncTablePage />
                 </Route>
                 <Route path="/secret" exact>
-                  <Secret />
+                  <SecretPage />
                 </Route>
                 <Redirect to="/home" exact />
               </Switch>
