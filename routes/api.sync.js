@@ -14,9 +14,7 @@ router.post("/", async (req, res) => {
         .json({ message: "User not found! Create table in telegram bot." });
     }
 
-    const taskList = await Task.getList(userID);
-    console.log(taskList);
-    res.json({ userID, username: user.username, taskList });
+    res.json({ userID, username: user.username });
   } catch (e) {
     res.status(500).json({ message: "Something gone wrong. Try again." });
   }
