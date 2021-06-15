@@ -30,9 +30,9 @@ task.deleteTask = async ({ userID, taskId }) => {
     await conn.end();
 }
 
-task.toggleStatus = async ({ userID, taskId, status }) => {
+task.toggleStatus = async ({ userID, taskID, status }) => {
     const conn = await create_con();
-    await conn.execute("UPDATE task SET status = ? WHERE user_id = ? AND id = ?", [status, userID, taskId]);
+    await conn.execute("UPDATE task SET status = ? WHERE user_id = ? AND id = ?", [status, userID, taskID]);
     await conn.commit();
     await conn.end();
 }

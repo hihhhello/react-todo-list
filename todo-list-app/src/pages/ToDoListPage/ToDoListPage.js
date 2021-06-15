@@ -16,18 +16,20 @@ export const ToDoListPage = () => {
       const { userID } = user;
       const fetchData = async () => {
         try {
-          const { todoList } = await request("api/db/get-todos", "POST", { userID });
+          const { todoList } = await request("api/db/get-todos", "POST", {
+            userID,
+          });
           if (todoList) {
             setTodoList(todoList);
           }
         } catch (e) {
           console.log(e);
         }
-      }
+      };
       fetchData();
     }
     const localList = JSON.parse(localStorage.getItem("todo-list"));
-    if(localList) {
+    if (localList) {
       setTodoList(localList);
     }
   }, [request]);
@@ -51,7 +53,7 @@ export const ToDoListPage = () => {
           title: taskTitle,
           descr: "descr",
         });
-        setTodoList( todoList );
+        setTodoList(todoList);
         setTaskTitle("");
       } catch (e) {
         throw e;
@@ -61,25 +63,23 @@ export const ToDoListPage = () => {
 
   const handleRowButtons = async (taskID, e) => {
     const btn = e.target.getAttribute("data-row-btn");
-    const user = localStorage.getItem("user");
+    const user = JSON.parse(localStorage.getItem("user"));
     if (user) {
       const { userID } = user;
       try {
-        const task = await request("api/db/get-task", "PUT", { taskID });
+        const { task } = await request("api/db/get-task", "POST", { taskID });
         const status = btn === "delete" ? 2 : !task.status;
-        const result = await request("api/db/set-task-status", "POST", {
+        const { todoList } = await request("api/db/set-task-status", "POST", {
           userID,
           taskID,
           status,
         });
-        setTodoList(result);
+        setTodoList(todoList);
       } catch (e) {
         throw e;
       }
       return;
     }
-
-    // implement change local status
   };
 
   const handleClearButton = async (e) => {
@@ -88,16 +88,15 @@ export const ToDoListPage = () => {
     if (user) {
       const { userID } = user;
       try {
-        const { todoList } = await request("api/db/clear-list", "DELETE", { userID });
+        const { todoList } = await request("api/db/clear-list", "DELETE", {
+          userID,
+        });
         setTodoList(todoList);
       } catch (e) {
         throw e;
       }
       return;
     }
-
-    localStorage.setItem("todo-list", JSON.stringify([]));
-    setTodoList([]);
   };
 
   return (
@@ -110,15 +109,12 @@ export const ToDoListPage = () => {
             onAdd={addTodo}
             todoTitle={taskTitle}
           />
-          {loading ? (
-            "Loading..."
-          ) : (
-            <ToDoList
-              todoList={todoList}
-              onClick={(id, e) => handleRowButtons(id, e)}
-              onClear={handleClearButton}
-            />
-          )}
+          <ToDoList
+            todoList={todoList}
+            onClick={(id, e) => handleRowButtons(id, e)}
+            onClear={handleClearButton}
+            loading={loading}
+          />
         </div>
       </div>
     </div>

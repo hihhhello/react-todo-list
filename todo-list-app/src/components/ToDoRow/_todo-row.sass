@@ -1,19 +1,20 @@
 .todo-row + .todo-row
     margin-top: 35px
 .todo-row
+    position: relative
     cursor: pointer
     width: 100%
     &__wrapper
         position: relative
         display: flex
         align-items: center
-        &::after
-            position: absolute
-            content: ''
-            width: 233px
-            height: 1px
-            border-bottom: 1px solid #000
-            bottom: -15px
+    &::after
+        position: absolute
+        content: ''
+        width: 233px
+        height: 1px
+        border-bottom: 1px solid #000
+        bottom: -15px
     &__btns
         display: flex
         align-items: center
@@ -38,3 +39,8 @@
             opacity: .5
             color: #FF0000
             text-decoration: line-through
+
+
+.todo-row.active
+    background-color: #ee2
+    height: 100px

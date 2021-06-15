@@ -1,22 +1,25 @@
-import ToDoRow from "../../components/ToDoRow";
+import ToDoRow from "../ToDoRow";
+import Spinner from "../Spinner";
 import "./_todo-list.sass";
-function ToDoList({ todoList, onClick, onClear }) {
+function ToDoList({ todoList, onClick, onClear, loading }) {
   return (
     <div className="todo-list">
       <div className="container">
         <div className="todo-list__wrapper">
           <div className="todo-list__items">
-            {todoList.map(({ title, status, id }) => {
-              return (
-                <ToDoRow
-                  key={id}
-                  id={id}
-                  status={status}
-                  title={title}
-                  onClick={onClick}
-                />
-              );
-            })}
+            {loading
+              ? <Spinner />
+              : todoList.map(({ title, status, id }) => {
+                  return (
+                    <ToDoRow
+                      key={id}
+                      id={id}
+                      status={status}
+                      title={title}
+                      onClick={onClick}
+                    />
+                  );
+                })}
           </div>
           <button onClick={onClear} className="todo-list__clear">
             Clear
