@@ -1,5 +1,5 @@
 import "./_todo-row.sass";
-function ToDoRow({ status, title, onClick, id }) {
+function ToDoRow({ status, title, onStatus, id }) {
   const { boxPath, boxAlt } = status
     ? { boxPath: "/icons/checkbox-checked.svg", boxAlt: "done" }
     : { boxPath: "/icons/checkbox.svg", boxAlt: "not done" };
@@ -13,7 +13,7 @@ function ToDoRow({ status, title, onClick, id }) {
         <div className="todo-row__wrapper">
           <div className="todo-row__btns">
             <div
-              onClick={(e) => onClick(id, e)}
+              onClick={(e) => onStatus(id, e)}
               className="todo-row__btn todo-row__btn_delete"
             >
               <img
@@ -23,7 +23,7 @@ function ToDoRow({ status, title, onClick, id }) {
               />
             </div>
             <div
-              onClick={(e) => onClick(id, e)}
+              onClick={(e) => onStatus(id, e)}
               className="todo-row__btn todo-row__btn_check"
             >
               <img data-row-btn={"check"} src={boxPath} alt={boxAlt} />

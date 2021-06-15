@@ -16,7 +16,7 @@ function ToDoList({ todoList, onClick, onClear, loading }) {
                       id={id}
                       status={status}
                       title={title}
-                      onClick={onClick}
+                      onStatus={onClick}
                     />
                   );
                 })}
