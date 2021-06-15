@@ -29,7 +29,7 @@ function ToDoRow({ status, title, onStatus, id }) {
               <img data-row-btn={"check"} src={boxPath} alt={boxAlt} />
             </div>
           </div>
-          <div className={titleClass}>{title}</div>
+          <div className={titleClass} onClick={() => alert("dasdas")}>{title}</div>
         </div>
       </div>
     </div>
