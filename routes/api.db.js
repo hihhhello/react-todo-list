@@ -18,7 +18,7 @@ router.get("/get-todos", async (req, res) => {
 });
 
 // api/db/set-task
-router.set("/set-task", async (req, res) => {
+router.post("/set-task", async (req, res) => {
     try {
         const { userID, title } = req.body;
         await Task.addTask({ userID, title, descr: "none"});
