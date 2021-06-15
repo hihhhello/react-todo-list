@@ -1,8 +1,8 @@
 import "./_todo-row.sass"
-function ToDoRow({ isDone, descr, onClick, id }) {
-    const {chbPath, chbAlt} = isDone ? {chbPath: "/icons/checkbox-checked.svg", chbAlt: "done"}
+function ToDoRow({ status, title, onClick, id }) {
+    const {chbPath, chbAlt} = status ? {chbPath: "/icons/checkbox-checked.svg", chbAlt: "done"}
     : {chbPath: "/icons/checkbox.svg", chbAlt: "not done"};
-    const descrClass = isDone ? "todo-row__descr todo-row__descr_checked" : "todo-row__descr";
+    const titleClass = status ? "todo-row__title todo-row__title_checked" : "todo-row__title";
 
     return(
         <div className="todo-row">
@@ -18,8 +18,8 @@ function ToDoRow({ isDone, descr, onClick, id }) {
                             <img data-row-btn={"check"} src={chbPath} alt={chbAlt}/>
                         </div>
                     </div>
-                    <div className={descrClass}>
-                        {descr}
+                    <div className={titleClass}>
+                        {title}
                     </div>
                 </div>
             </div>

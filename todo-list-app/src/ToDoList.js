@@ -7,13 +7,13 @@ function ToDoList({ todoList, onClick, onClear }) {
                 <div className="todo-list__wrapper">
                     <div className="todo-list__items">
                         {
-                            todoList.map(({descr, isDone, id}) => 
+                            todoList.map(({title, status, id}) => 
                             { 
                                 return <ToDoRow 
                                             key={id}
                                             id={id} 
-                                            isDone={isDone} 
-                                            descr={descr} 
+                                            status={status} 
+                                            title={title} 
                                             onClick={onClick}
                                             />;
                             })

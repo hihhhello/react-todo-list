@@ -5,6 +5,9 @@ const app = express();
 
 const PORT = config.get("port") || 5000;
 
+app.use(express.json({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
+
 app.use("/api/sync", require("./routes/api.sync"));
 
 app.use("/", (req, res) => {

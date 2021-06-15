@@ -39,25 +39,25 @@ class App extends React.Component {
     return (
       <div className="app">
         <ThemeContext.Provider value={this.state}>
-          <ErrorBoundary>
-            <Router>
-              <Header />
-              <div className={contentClass}>
-                <Switch>
-                  <Route path="/home" exact>
+          <Router>
+            <Header />
+            <div className={contentClass}>
+              <Switch>
+                <Route path="/home" exact>
+                  <ErrorBoundary>
                     <ToDoListPage />
-                  </Route>
-                  <Route path="/sync-table" exact>
-                    <SyncTablePage />
-                  </Route>
-                  <Route path="/secret" exact>
-                    <Secret />
-                  </Route>
-                  <Redirect to="/home" exact />
-                </Switch>
-              </div>
-            </Router>
-          </ErrorBoundary>
+                  </ErrorBoundary>
+                </Route>
+                <Route path="/sync-table" exact>
+                  <SyncTablePage />
+                </Route>
+                <Route path="/secret" exact>
+                  <Secret />
+                </Route>
+                <Redirect to="/home" exact />
+              </Switch>
+            </div>
+          </Router>
         </ThemeContext.Provider>
       </div>
     );

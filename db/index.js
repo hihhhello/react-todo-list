@@ -1,3 +1,3 @@
 const db_manager = module.exports = {};
-db_manager.user = require("./user");
-db_manager.task = require("./task");
+db_manager.User = require("./user");
+db_manager.Task = require("./task");

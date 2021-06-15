@@ -5,9 +5,9 @@ import { idGenerator } from "./services";
 
 import { ThemeContext } from "./theme-context";
 
-import "./_todo-table.sass";
+import "./_todo-table-page.sass";
 
-class ToDoListTable extends React.Component {
+class ToDoListPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -46,11 +46,10 @@ class ToDoListTable extends React.Component {
     }
     const newTask = {
       id: this.ids.next().value,
-      descr: todoTitle,
-      isDone: false,
+      title: todoTitle,
+      status: false,
     };
     const newList = [...todoList, newTask];
-    console.log(newList);
     this.setState({ todoList: newList });
     this.onChangeTodoTitle("");
   }
@@ -66,7 +65,7 @@ class ToDoListTable extends React.Component {
       }
       case "check": {
         const rowToChange = todoList[ind];
-        rowToChange.isDone = !rowToChange.isDone;
+        rowToChange.status = !rowToChange.status;
         const newList = [
           ...todoList.slice(0, ind),
           rowToChange,
@@ -86,9 +85,9 @@ class ToDoListTable extends React.Component {
   }
 
   render() {
-    if (this.state.todoList.length > 5) {
-      throw new Error("test");
-    }
+    // if (this.state.todoList.length > 5) {
+    //   throw new Error("Local error");
+    // }
     return (
       <div className="todo-table">
         <div className="container">
@@ -111,6 +110,6 @@ class ToDoListTable extends React.Component {
   }
 }
 
-ToDoListTable.contextType = ThemeContext;
+ToDoListPage.contextType = ThemeContext;
 
-export default ToDoListTable;
+export default ToDoListPage;
