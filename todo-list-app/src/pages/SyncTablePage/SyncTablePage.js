@@ -12,8 +12,8 @@ export const SyncTablePage = () => {
 
   const syncTablesHandler = async () => {
     try {
-      const data = await request("api/sync", "POST", { userID });
-      localStorage.setItem("todo-list", JSON.stringify(data.taskList));
+      const userData = await request("api/sync", "POST", { userID });
+      localStorage.setItem("user", JSON.stringify(userData));
     } catch (e) {}
   };
 
