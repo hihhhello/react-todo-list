@@ -28,10 +28,6 @@ export const ToDoListPage = () => {
       };
       fetchData();
     }
-    const localList = JSON.parse(localStorage.getItem("todo-list"));
-    if (localList) {
-      setTodoList(localList);
-    }
   }, [request]);
 
   const onChangeTaskTitle = (title) => {
