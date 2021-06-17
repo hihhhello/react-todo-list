@@ -1,12 +1,9 @@
+@import "../../base"
 .todo-row + .todo-row
     margin-top: 35px
 .todo-row
     position: relative
     width: 100%
-    &__wrapper
-        position: relative
-        display: flex
-        align-items: center
     &::after
         position: absolute
         content: ''
@@ -14,6 +11,11 @@
         height: 1px
         border-bottom: 1px solid #000
         bottom: -15px
+    &__wrapper
+        position: relative
+        display: flex
+        flex-wrap: wrap
+        align-items: center
     &__btns
         display: flex
         align-items: center
@@ -23,21 +25,21 @@
             position: relative
             width: 18px
             height: 18px
-            background-color: #dfdfdf
+            background-color: $not-checked
             border-radius: 5px
             margin-left: 2px
             transition: .3s all
             &:hover
-                background-color: #c4c4c4
+                background-color: $checked
             img
                 position: absolute
                 left: 50%
                 top: 50%
                 transform: translate(-50%,-50%)
             &.active
-                background-color: #c4c4c4
+                background-color: $not-checked
                 &:hover
-                    background-color: #dfdfdf
+                    background-color: $checked
         &_delete
             width: 20px
             height: 25px
@@ -45,11 +47,20 @@
             z-index: 5
             object-fit: cover
     &__title
-        cursor: pointer
+        list-style: none
+        cursor: default
         margin-left: 20px
         font-size: 18px
         line-height: 21px
+        &:hover + div
+            max-height: 100px
+            transition: max-height 1s ease-in
         &_checked
-            opacity: .5
-            color: #FF0000
+            color: rgba(255,0,0,.5)
             text-decoration: line-through
+    &__descr
+        margin-left: 60px
+        width: 100%
+        max-height: 0
+        overflow: hidden
+        transition: max-height 1.5s ease-out

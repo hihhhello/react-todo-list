@@ -9,7 +9,7 @@ function ToDoList({ todoList, onClick, onClear, loading }) {
           <div className="todo-list__items">
             {loading
               ? <Spinner />
-              : todoList.map(({ title, status, id }) => {
+              : todoList.map(({ title, status, id, descr }) => {
                   return (
                     <ToDoRow
                       key={id}
@@ -17,6 +17,7 @@ function ToDoList({ todoList, onClick, onClear, loading }) {
                       status={status}
                       title={title}
                       onStatus={onClick}
+                      descr={descr}
                     />
                   );
                 })}

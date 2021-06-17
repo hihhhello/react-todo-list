@@ -1,5 +1,5 @@
 import "./_todo-row.sass";
-function ToDoRow({ status, title, onStatus, id }) {
+function ToDoRow({ status, title, onStatus, id, descr }) {
   const titleClass = status
     ? "todo-row__title todo-row__title_checked"
     : "todo-row__title";
@@ -34,9 +34,8 @@ function ToDoRow({ status, title, onStatus, id }) {
               )}
             </div>
           </div>
-          <div className={titleClass}>
-            {title}
-          </div>
+          <div className={titleClass}>{title}</div>
+          <div className="todo-row__descr">{descr}</div>
         </div>
       </div>
     </div>
