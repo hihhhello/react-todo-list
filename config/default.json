@@ -3,5 +3,6 @@
     "db_host": "localhost",
     "db_user": "root",
     "db_pass": "1",
-    "db_name": "node_test"
+    "db_name": "node_test",
+    "baseUrl": "http://localhost:5000"
 }
