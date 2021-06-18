@@ -2,7 +2,6 @@ const create_con = require("./connection");
 const user = (module.exports = {});
 
 user.getUser = async (userID) => {
-  console.log("DB USER", typeof userID);
   try {
     const conn = await create_con();
     const [rows] = await conn.execute("SELECT * FROM user WHERE user_id = ?", [
