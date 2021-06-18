@@ -39,11 +39,11 @@ class App extends React.Component {
     return (
       <div className="app">
         <ThemeContext.Provider value={this.state}>
-          <Router>
+          <Router basename="/react-app">
             <Header />
             <div className={contentClass}>
               <Switch>
-                <Route path="/home" exact>
+                <Route path="/" exact>
                   <ErrorBoundary>
                     <ToDoListPage />
                   </ErrorBoundary>
@@ -54,7 +54,7 @@ class App extends React.Component {
                 <Route path="/secret" exact>
                   {/* <SecretPage /> */}
                 </Route>
-                <Redirect to="/home" exact />
+                <Redirect to="/" exact />
               </Switch>
             </div>
           </Router>
