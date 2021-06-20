@@ -1,5 +1,5 @@
 import React from "react";
-import { useScript } from "../../hooks/script.hooks";
+import { useScript } from "../../hooks/script.hook";
 import "./_auth-page.sass";
 
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import AddTaskBar from "../../components/AddTaskBar";
 import ToDoList from "../../components/ToDoList";
-import { useHttp } from "../../hooks/http.hooks";
+import { useHttp } from "../../hooks/http.hook";
 
 import "./_todo-list-page.sass";
 
