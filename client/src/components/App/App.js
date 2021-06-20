@@ -13,7 +13,7 @@ export const App = () => {
   const [theme, setTheme] = useState(themes.light);
 
   const toggleTheme = () =>
-    setTheme(theme === themes.dark ? themes.light : theme.dark);
+    setTheme(theme === themes.dark ? themes.light : themes.dark);
 
   const contentClass =
     theme === themes.dark ? "app__content app__content_dark" : "app__content";
