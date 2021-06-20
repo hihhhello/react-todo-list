@@ -4,7 +4,7 @@ export const useScript = ({
   url,
   isAsync = false,
   data = [],
-  parentSelector = "body"
+  parentSelector = "body",
 }) => {
   useEffect(() => {
     const script = document.createElement("script");

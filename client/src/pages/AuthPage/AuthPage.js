@@ -1,7 +1,7 @@
 import React from "react";
 import { useScript } from "../../hooks/script.hook";
+import { useEffect } from "react";
 import "./_auth-page.sass";
-
 
 export const AuthPage = () => {
   useScript({
@@ -15,8 +15,6 @@ export const AuthPage = () => {
     ],
     parentSelector: ".auth-page__wrapper",
   });
-
-  
 
   return (
     <div className="auth-page">
