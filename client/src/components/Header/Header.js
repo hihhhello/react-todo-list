@@ -15,32 +15,9 @@ function Header() {
                 TodoList App
               </NavLink>
             </h2>
-            <nav className="header__nav">
-              <button className="header__togle-btn" onClick={toggleTheme}>
-                Toggle theme
-              </button>
-              <NavLink
-                className="header__link header__link_nav"
-                activeClassName="header__link_active"
-                to="./home"
-              >
-                Home
-              </NavLink>
-              <NavLink
-                className="header__link header__link_nav"
-                activeClassName="header__link_active"
-                to="./sync-table"
-              >
-                Sync table
-              </NavLink>
-              <NavLink
-                className="header__link header__link_nav"
-                activeClassName="header__link_active"
-                to="./secret"
-              >
-                Link3
-              </NavLink>
-            </nav>
+            <button className="header__togle-btn" onClick={toggleTheme}>
+              Toggle theme
+            </button>
           </div>
         </header>
       )}
