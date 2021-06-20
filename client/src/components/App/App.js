@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../Header";
 import ToDoListPage from "../../pages/ToDoListPage";
 import ErrorBoundary from "../ErrorBoundary";
@@ -12,8 +12,19 @@ import "./_app.sass";
 export const App = () => {
   const [theme, setTheme] = useState(themes.light);
 
-  const toggleTheme = () =>
-    setTheme(theme === themes.dark ? themes.light : themes.dark);
+  const toggleTheme = () => {
+    const themeToSet = theme === themes.dark ? themes.light : themes.dark; 
+    setTheme(themeToSet);
+    localStorage.setItem("theme", themeToSet);
+  }
+  
+  useEffect(() => {
+    const localTheme = localStorage.getItem("theme");
+    if (localTheme && localTheme != theme) {
+      setTheme(localTheme);
+      return;
+    }
+  }, [theme])
 
   const contentClass =
     theme === themes.dark ? "app__content app__content_dark" : "app__content";
