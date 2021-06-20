@@ -3,6 +3,11 @@ import Header from "../Header";
 import ToDoListPage from "../../pages/ToDoListPage";
 import ErrorBoundary from "../ErrorBoundary";
 
+import {
+  Redirect,
+  BrowserRouter as Router,
+} from "react-router-dom";
+
 import { ThemeContext, themes } from "../../context/theme-context";
 
 import "./_app.sass";
@@ -36,6 +41,7 @@ class App extends React.Component {
               <ErrorBoundary>
                 <ToDoListPage />
               </ErrorBoundary>
+              <Redirect to="./" />
             </div>
           </Router>
         </ThemeContext.Provider>
