@@ -1,2 +1,2 @@
-export { LoginPage } from "./LoginPage";
+import { LoginPage } from "./LoginPage.js";
 export default LoginPage;
