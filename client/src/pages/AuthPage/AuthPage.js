@@ -9,7 +9,7 @@ export const AuthPage = () => {
     data: [
       { attr: "telegramLogin", value: "node321bot" },
       { attr: "size", value: "large" },
-      { attr: "authUrl", value: "/react-app/api/tg-auth" },
+      { attr: "authUrl", value: "/react-app/login" },
       { attr: "requestAccess", value: "write" },
     ],
     parentSelector: ".auth-page__wrapper",
