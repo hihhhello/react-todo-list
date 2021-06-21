@@ -22,10 +22,12 @@ router.get("/", async (req, res) => {
         expiresIn: "1h",
       });
       res.json({ token, userID: payload.id });
+      return;
     }
     res
       .status(400)
       .json({ message: "Something wrong with recieved data. Try again." });
+    return;
   } catch (e) {
     console.log(e);
     res
