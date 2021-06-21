@@ -2,31 +2,35 @@ const express = require('express');
 const config = require('config');
 const path = require("path");
 const { Router } = require("express");
-const router = Router();
+const apiRouter = Router();
 const app = express();
 
 const PORT = config.get("port") || 4000;
 app.use(express.json({ extended: true }));
 app.use(express.urlencoded({ extended: true }));
 
-router.get("/", (req, res) => {
+apiRouter.get("/", (req, res) => {
+    console.log(req.query);
     res.send("Hello dev!");
 });
 
-router.use("/sync", require("./routes/api.sync"));
-router.use("/db", require("./routes/api.db"));
-router.use("/tg-auth", require("./routes/api.tg-auth"));
+apiRouter.use("/sync", require("./routes/api.sync"));
+apiRouter.use("/db", require("./routes/api.db"));
+apiRouter.use("/tg-auth", require("./routes/api.tg-auth"));
 
 if (process.env.NODE_ENV === "production") {
-    app.use("/", express.static(path.join(__dirname, "client", "build")));
+    const clientRouter = Router();
+    clientRouter.use("/", express.static(path.join(__dirname, "client", "build")));
     
-    app.get("*", (req, res) => {
+    clientRouter.get("*", (req, res) => {
         res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
     });
+
+    app.use("/react-app", clientRouter);
 }
 
 
-app.use("/react-app/api", router);
+app.use("/react-app/api", apiRouter);
 
 
 app.listen(PORT, () => {

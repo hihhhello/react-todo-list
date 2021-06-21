@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import AddTaskBar from "../../components/AddTaskBar";
 import ToDoList from "../../components/ToDoList";
 import { useHttp } from "../../hooks/http.hook";
+import { useParams } from "react-router-dom";
 
 import "./_todo-list-page.sass";
 
@@ -9,6 +10,7 @@ export const ToDoListPage = () => {
   const { loading, request } = useHttp();
   const [taskTitle, setTaskTitle] = useState("");
   const [todoList, setTodoList] = useState([]);
+  console.log(useParams());
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));

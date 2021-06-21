@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Redirect, BrowserRouter as Router } from "react-router-dom";
+import {
+  Switch,
+  Route,
+  Redirect,
+  BrowserRouter as Router,
+} from "react-router-dom";
 
 import ToDoListPage from "../../pages/ToDoListPage";
 import AuthPage from "../../pages/AuthPage";
@@ -41,9 +46,22 @@ export const App = () => {
             <Header />
             <div className={contentClass}>
               <ErrorBoundary>
-                {isAuth ? <ToDoListPage /> : <AuthPage />}
+                {isAuth ? (
+                  <Switch>
+                    <Route path="/table/:id">
+                      <ToDoListPage />
+                    </Route>
+                    <Redirect to="/table" />
+                  </Switch>
+                ) : (
+                  <Switch>
+                    <Route path="/">
+                      <AuthPage />
+                      <Redirect to="/" />
+                    </Route>
+                  </Switch>
+                )}
               </ErrorBoundary>
-              <Redirect to="/" />
             </div>
           </Router>
         </ThemeContext.Provider>

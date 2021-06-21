@@ -1,6 +1,5 @@
 import React from "react";
 import { useScript } from "../../hooks/script.hook";
-import { useEffect } from "react";
 import "./_auth-page.sass";
 
 export const AuthPage = () => {

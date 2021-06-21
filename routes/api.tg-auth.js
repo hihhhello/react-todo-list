@@ -2,6 +2,7 @@ const { Router } = require("express");
 const router = Router();
 const config = require("config");
 const { createHash, createHmac } = require("crypto");
+const { User } = require("../db/index");
 const jwt = require("jsonwebtoken");
 
 function checkSignature(token, { hash, ...data }) {
@@ -18,6 +19,13 @@ router.get("/", async (req, res) => {
   try {
     const payload = req.query;
     if (checkSignature(config.get("botToken"), payload)) {
+      const user = await User.getUser(payload.id);
+      if (!user)
+        res
+          .status(400)
+          .json({
+            message: "User not found. Start chat with bot and try again",
+          });
       const token = jwt.sign({ userID: payload.id }, config.get("jwtSecret"), {
         expiresIn: "1h",
       });
@@ -26,7 +34,7 @@ router.get("/", async (req, res) => {
     }
     res
       .status(400)
-      .json({ message: "Something wrong with recieved data. Try again." });
+      .json({ message: "Something wrong with recieved tg data. Try again." });
     return;
   } catch (e) {
     console.log(e);
