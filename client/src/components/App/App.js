@@ -8,6 +8,7 @@ import {
 
 import ToDoListPage from "../../pages/ToDoListPage";
 import AuthPage from "../../pages/AuthPage";
+import LoginPage from "../../pages/LoginPage";
 import ErrorBoundary from "../ErrorBoundary";
 import Header from "../Header";
 
@@ -45,23 +46,30 @@ export const App = () => {
           <Router basename="/react-app">
             <Header />
             <div className={contentClass}>
-              <ErrorBoundary>
-                {isAuth ? (
-                  <Switch>
-                    <Route path="/table/:id">
+              {isAuth ? (
+                <Switch>
+                  <Route path="/table">
+                    <ErrorBoundary>
                       <ToDoListPage />
-                    </Route>
-                    <Redirect to="/table" />
-                  </Switch>
-                ) : (
-                  <Switch>
-                    <Route path="/">
+                    </ErrorBoundary>
+                  </Route>
+                  <Redirect to="/table" />
+                </Switch>
+              ) : (
+                <Switch>
+                  <Route path="/">
+                    <ErrorBoundary>
                       <AuthPage />
-                      <Redirect to="/" />
-                    </Route>
-                  </Switch>
-                )}
-              </ErrorBoundary>
+                    </ErrorBoundary>
+                  </Route>
+                  <Route path="/login">
+                    <ErrorBoundary>
+                      <LoginPage />
+                    </ErrorBoundary>
+                  </Route>
+                  <Redirect to="/" />
+                </Switch>
+              )}
             </div>
           </Router>
         </ThemeContext.Provider>
