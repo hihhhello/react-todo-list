@@ -48,21 +48,21 @@ export const App = () => {
             <div className={contentClass}>
               {isAuth ? (
                 <Switch>
-                  <Route path="/table">
+                  <Route path="/" exact>
                     <ErrorBoundary>
                       <ToDoListPage />
                     </ErrorBoundary>
                   </Route>
-                  <Redirect to="/table" />
+                  <Redirect to="/" />
                 </Switch>
               ) : (
                 <Switch>
-                  <Route path="/">
+                  <Route path="/" exact>
                     <ErrorBoundary>
                       <AuthPage />
                     </ErrorBoundary>
                   </Route>
-                  <Route path="/login">
+                  <Route exact path="/login">
                     <ErrorBoundary>
                       <LoginPage />
                     </ErrorBoundary>

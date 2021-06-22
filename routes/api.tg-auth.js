@@ -15,21 +15,21 @@ function checkSignature(token, { hash, ...data }) {
   return hmac === hash;
 }
 
-router.get("/", async (req, res) => {
+router.post("/", async (req, res) => {
   try {
-    const payload = req.query;
-    if (checkSignature(config.get("botToken"), payload)) {
-      const user = await User.getUser(payload.id);
+    const { userData } = req.body;
+    if (checkSignature(config.get("botToken"), userData)) {
+      const user = await User.getUser(userData.id);
       if (!user)
         res
           .status(400)
           .json({
             message: "User not found. Start chat with bot and try again",
           });
-      const token = jwt.sign({ userID: payload.id }, config.get("jwtSecret"), {
+      const token = jwt.sign({ userID: userData.id }, config.get("jwtSecret"), {
         expiresIn: "1h",
       });
-      res.json({ token, userID: payload.id });
+      res.json({ token, userID: userData.id });
       return;
     }
     res

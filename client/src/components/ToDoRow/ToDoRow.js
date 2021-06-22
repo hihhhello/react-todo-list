@@ -15,7 +15,7 @@ function ToDoRow({ status, title, onStatus, id, descr }) {
             >
               <img
                 data-row-btn={"delete"}
-                src={"/icons/delete.svg"}
+                src={"./icons/delete.svg"}
                 alt={"delete"}
               />
             </div>
@@ -28,7 +28,7 @@ function ToDoRow({ status, title, onStatus, id, descr }) {
               {!status ? null : (
                 <img
                   data-row-btn={"check"}
-                  src={"/icons/tick.svg"}
+                  src={"./icons/tick.svg"}
                   alt={"done"}
                 />
               )}
