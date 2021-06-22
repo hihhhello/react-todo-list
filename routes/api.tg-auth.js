@@ -24,7 +24,7 @@ router.post("/", async (req, res) => {
         res
           .status(400)
           .json({
-            message: "User not found. Start chat with bot and try again",
+            message: "User not found. Start chat with bot and try again.",
           });
       const token = jwt.sign({ userID: userData.id }, config.get("jwtSecret"), {
         expiresIn: "1h",
@@ -34,7 +34,7 @@ router.post("/", async (req, res) => {
     }
     res
       .status(400)
-      .json({ message: "Something wrong with recieved tg data. Try again." });
+      .json({ message: "Something wrong with recieved telegram data. Try again." });
     return;
   } catch (e) {
     console.log(e);

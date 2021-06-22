@@ -4,10 +4,11 @@ import { useLocation } from "react-router-dom";
 import { useHttp } from "../../hooks/http.hook";
 import AuthContext from "../../context/auth-context";
 import Spinner from "../../components/Spinner";
+import "./_login-page.sass";
 
 export const LoginPage = () => {
-  const { loading, request } = useHttp();
-  const { login, isAuth } = useContext(AuthContext);
+  const { loading, request, error } = useHttp();
+  const { login } = useContext(AuthContext);
   const userData = Object.fromEntries(
     new URLSearchParams(useLocation().search).entries()
   );
@@ -19,17 +20,31 @@ export const LoginPage = () => {
         });
         login(user);
       } catch (e) {
-        console.log(e);
+        
       }
     };
     fetchData();
   }, []);
 
-  return loading ? (
-    <Spinner />
-  ) : !loading && !isAuth ? (
-    <h1>Not logged in</h1>
-  ) : (
-    <h1>Logged in</h1>
+  let pageContent = null;
+  if(loading) {
+    pageContent = <Spinner />
+  } else {
+    pageContent = (
+      <>
+          <h1 className="login-page__not-logged">Not logged in</h1>
+          {error || <h2 className="login-page__error">{error}</h2>}
+      </>
+    )
+  }
+
+  return (
+    <div className="login-page">
+      <div className="container">
+        <div className="login-page__wrapper">
+          {pageContent}
+        </div>
+      </div>
+    </div>
   );
 };
