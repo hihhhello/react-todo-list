@@ -27,7 +27,11 @@
         &_active
             color: $main-color
             @include link_no_hover
-    &__togle-btn
+    &__btns
+        display: flex
+    &__btn + &__btn
+        margin-left: 20px
+    &__btn
         cursor: pointer
         border: 2px solid #fff
         padding: 5px
