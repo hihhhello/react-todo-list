@@ -9,7 +9,6 @@ export const ToDoListPage = () => {
   const { loading, request } = useHttp();
   const [taskTitle, setTaskTitle] = useState("");
   const [todoList, setTodoList] = useState([]);
-
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
     if (user) {
@@ -19,16 +18,14 @@ export const ToDoListPage = () => {
           const { todoList } = await request("api/db/get-todos", "POST", {
             userID,
           });
-          if (todoList) {
-            setTodoList(todoList);
-          }
+          setTodoList(todoList);
         } catch (e) {
           console.log(e);
         }
       };
       fetchData();
     }
-  }, [request]);
+  }, []);
 
   const onChangeTaskTitle = (title) => {
     setTaskTitle(title);

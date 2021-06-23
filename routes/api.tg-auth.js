@@ -37,7 +37,6 @@ router.post("/", async (req, res) => {
       .json({ message: "Something wrong with recieved telegram data. Try again." });
     return;
   } catch (e) {
-    console.log(e);
     res
       .status(500)
       .json({ message: "Something gone wrong while tg-auth. Try again." });
