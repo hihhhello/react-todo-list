@@ -22,6 +22,9 @@ export const LoginPage = () => {
         const user = await request("api/tg-auth", "POST", {
           userData,
         });
+        if(user.isNew) {
+          
+        }
         login(user);
       } catch (e) {}
     };

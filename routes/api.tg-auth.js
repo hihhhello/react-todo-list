@@ -20,23 +20,28 @@ router.post("/", async (req, res) => {
     const { userData } = req.body;
     if (checkSignature(config.get("botToken"), userData)) {
       const user = await User.getUser(userData.id);
-      if (!user)
-        res
-          .status(400)
-          .json({
-            message: "User not found. Start chat with bot and try again.",
-          });
+      let isNew = false;
+      if (!user) {
+        await User.regUser({
+          userID: userData.id,
+          username: userData.username,
+        });
+        isNew = true;
+      };
       const token = jwt.sign({ userID: userData.id }, config.get("jwtSecret"), {
         expiresIn: "1h",
       });
-      res.json({ token, userID: userData.id });
+      res.json({ token, userID: userData.id, isNew });
       return;
     }
     res
       .status(400)
-      .json({ message: "Something wrong with recieved telegram data. Try again." });
+      .json({
+        message: "Something wrong with recieved telegram data. Try again.",
+      });
     return;
   } catch (e) {
+    console.log(e);
     res
       .status(500)
       .json({ message: "Something gone wrong while tg-auth. Try again." });
