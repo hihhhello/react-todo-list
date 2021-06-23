@@ -23,7 +23,9 @@ export const LoginPage = () => {
           userData,
         });
         if(user.isNew) {
-          
+          await request("https://hihhhello.club/node_test/new-user/", "POST", {
+            userData,
+          });
         }
         login(user);
       } catch (e) {}
