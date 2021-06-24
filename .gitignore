@@ -15,6 +15,7 @@ node_modules
 
 # production
 /config
+package-lock.json
 *.dump
 /build
 
