@@ -43,7 +43,7 @@ export const App = () => {
     <div className="app">
       <AuthContext.Provider value={{ login, logout, userID, token, isAuth }}>
         <ThemeContext.Provider value={{ theme, toggleTheme }}>
-          <Router basename="/react-app" forceRefresh>
+          <Router basename="/react-todo-list" forceRefresh>
             <Header />
             <div className={contentClass}>
               {isAuth ? (

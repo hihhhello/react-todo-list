@@ -26,11 +26,11 @@ if (process.env.NODE_ENV === "production") {
         res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
     });
 
-    app.use("/react-app", clientRouter);
+    app.use("/react-todo-list", clientRouter);
 }
 
 
-app.use("/react-app/api", apiRouter);
+app.use("/react-todo-list/api", apiRouter);
 
 
 app.listen(PORT, () => {
