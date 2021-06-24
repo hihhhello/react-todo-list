@@ -14,7 +14,6 @@ apiRouter.get("/", (req, res) => {
     res.send("Hello dev!");
 });
 
-apiRouter.use("/sync", require("./routes/api.sync"));
 apiRouter.use("/db", require("./routes/api.db"));
 apiRouter.use("/tg-auth", require("./routes/api.tg-auth"));
 

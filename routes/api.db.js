@@ -6,7 +6,7 @@ const router = Router();
 // api/db/get-todos
 router.post("/get-todos", auth, async (req, res) => {
   try {
-    const { userID } = req.body;
+    const { userID } = req.user;
     const todoList = await Task.getList(userID);
     if (!todoList) {
       return res
@@ -46,7 +46,8 @@ router.post("/get-task", auth, async (req, res) => {
 // api/db/set-task
 router.post("/set-task", auth, async (req, res) => {
   try {
-    const { userID, title, descr } = req.body;
+    const { title, descr } = req.body;
+    const { userID } = req.user;
     await Task.addTask({ userID, title, descr });
     const todoList = await Task.getList(userID);
     res.status(201).json({ todoList });
@@ -58,7 +59,8 @@ router.post("/set-task", auth, async (req, res) => {
 // api/db/set-task-status
 router.post("/set-task-status", auth, async (req, res) => {
   try {
-    const { userID, taskID, status } = req.body;
+    const { taskID, status } = req.body;
+    const { userID } = req.user;
     await Task.toggleStatus({ userID, taskID, status });
     const todoList = await Task.getList(userID);
     res.status(201).json({ todoList });
