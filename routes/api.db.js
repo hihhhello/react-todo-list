@@ -1,9 +1,10 @@
 const { Router } = require("express");
 const { Task } = require("../db/index");
+const auth = require("../middleware/auth.middleware");
 const router = Router();
 
 // api/db/get-todos
-router.post("/get-todos", async (req, res) => {
+router.post("/get-todos", auth, async (req, res) => {
   try {
     const { userID } = req.body;
     const todoList = await Task.getList(userID);
@@ -25,7 +26,7 @@ router.post("/get-todos", async (req, res) => {
 });
 
 // api/db/get-task
-router.post("/get-task", async (req, res) => {
+router.post("/get-task", auth, async (req, res) => {
   try {
     const { taskID } = req.body;
     const task = await Task.getTask(taskID);
@@ -43,24 +44,24 @@ router.post("/get-task", async (req, res) => {
 });
 
 // api/db/set-task
-router.post("/set-task", async (req, res) => {
+router.post("/set-task", auth, async (req, res) => {
   try {
     const { userID, title, descr } = req.body;
     await Task.addTask({ userID, title, descr });
     const todoList = await Task.getList(userID);
-    res.json({ todoList });
+    res.status(201).json({ todoList });
   } catch (e) {
     res.status(500).json({ message: "Something gone wrong. Try again." });
   }
 });
 
 // api/db/set-task-status
-router.post("/set-task-status", async (req, res) => {
+router.post("/set-task-status", auth, async (req, res) => {
   try {
     const { userID, taskID, status } = req.body;
     await Task.toggleStatus({ userID, taskID, status });
     const todoList = await Task.getList(userID);
-    res.json({ todoList });
+    res.status(201).json({ todoList });
   } catch (e) {
     res
       .status(500)
@@ -71,7 +72,7 @@ router.post("/set-task-status", async (req, res) => {
 });
 
 // api/db/clear-list
-router.delete("/clear-list", async (req, res) => {
+router.delete("/clear-list", auth, async (req, res) => {
   try {
     const { userID } = req.body;
     await Task.clearList(userID);
