@@ -10,7 +10,7 @@ export const LoginPage = () => {
   const { loading, request, error } = useHttp();
   const { login } = useContext(AuthContext);
   const [intervalID, setIntervalID] = useState(null);
-  const redirectTime = 5;
+  const redirectTime = 3;
   const [leftTime, setLeftTime] = useState(redirectTime);
   let history = useHistory();
   const userData = Object.fromEntries(

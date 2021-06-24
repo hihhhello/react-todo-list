@@ -28,7 +28,7 @@ export const ToDoListPage = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [request, token]);
 
   const onChangeTaskTitle = (title) => {
     setTaskTitle(title);
