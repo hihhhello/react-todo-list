@@ -25,6 +25,7 @@ export const AuthPage = () => {
               telegram bot
             </a>
           </h1>
+          <span className="auth-page__arrow">&#8595;</span>
         </div>
       </div>
     </div>
