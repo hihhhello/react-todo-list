@@ -76,11 +76,12 @@ router.post("/set-task-status", auth, async (req, res) => {
 // api/db/clear-list
 router.delete("/clear-list", auth, async (req, res) => {
   try {
-    const { userID } = req.body;
+    const { userID } = req.user;
+    console.log("userID", userID);
     await Task.clearList(userID);
     res.json({ todoList: [] });
   } catch (e) {
-    res.status(500).json({ message: "Something gone wrong. Try again." });
+    res.status(500).json({ message: "Something gone wrong while deleting table. Try again." });
   }
 });
 
