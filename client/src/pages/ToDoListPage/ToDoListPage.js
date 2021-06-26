@@ -10,7 +10,7 @@ export const ToDoListPage = () => {
   const { loading, request } = useHttp();
   const [taskTitle, setTaskTitle] = useState("");
   const [todoList, setTodoList] = useState([]);
-  const { token } = useContext(AuthContext);
+  const { token, logout, error } = useContext(AuthContext);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -24,9 +24,12 @@ export const ToDoListPage = () => {
         );
         setTodoList(todoList);
       } catch (e) {
-        console.log(e);
+        if (+e.message === 401) {
+          logout();
+        }
       }
     };
+
     fetchData();
   }, [request, token]);
 
@@ -54,9 +57,7 @@ export const ToDoListPage = () => {
       );
       setTodoList(todoList);
       setTaskTitle("");
-    } catch (e) {
-      throw e;
-    }
+    } catch (e) {}
   };
 
   const handleRowButtons = async (taskID, e) => {
@@ -83,9 +84,7 @@ export const ToDoListPage = () => {
         }
       );
       setTodoList(todoList);
-    } catch (e) {
-      throw e;
-    }
+    } catch (e) {}
     return;
   };
 
@@ -101,9 +100,7 @@ export const ToDoListPage = () => {
         }
       );
       setTodoList(todoList);
-    } catch (e) {
-      throw e;
-    }
+    } catch (e) {}
     return;
   };
 

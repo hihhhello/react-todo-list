@@ -17,16 +17,7 @@ apiRouter.get("/", (req, res) => {
 apiRouter.use("/db", require("./routes/api.db"));
 apiRouter.use("/tg-auth", require("./routes/api.tg-auth"));
 
-if (process.env.NODE_ENV === "production") {
-    const clientRouter = Router();
-    clientRouter.use("/", express.static(path.join(__dirname, "client", "build")));
-    
-    clientRouter.get("*", (req, res) => {
-        res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-    });
 
-    app.use("/react-todo-list", clientRouter);
-}
 
 
 app.use("/react-todo-list/api", apiRouter);
